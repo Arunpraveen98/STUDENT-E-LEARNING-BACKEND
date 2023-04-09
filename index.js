@@ -116,7 +116,7 @@ app.post("/Create-Query", authorize, async function (req, res) {
     const connection = await mongoclient.connect(Mongo_Client_Url);
     const db = connection.db("ZEN_CLASS_STUDENT_DB");
     const collection = db.collection("Queries");
-    const Post_Query = await collection.insertOne(req.body);
+    const Post_Queries = await collection.insertOne(req.body);
     // console.log(Post_Task_Submission);
     await connection.close();
     res.json({ message: "Successfully Query Created." });
