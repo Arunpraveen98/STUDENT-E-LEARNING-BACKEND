@@ -2,10 +2,9 @@ const express = require("express");
 const app = express();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const crypto = require("crypto");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 8000;
-// const secretKey = crypto.randomBytes(32).toString("hex");
+
 app.use(express.json());
 // --------------------------------------------
 const cors = require("cors");
@@ -20,14 +19,12 @@ const mongoclient = mongodb.MongoClient;
 const Mongo_Client_Url = process.env.MONGO_DB_URL;
 // --------------------------------------------
 const authorize = (req, res, next) => {
-  // console.log(req.headers);
   if (req.headers.authorization) {
     try {
       const verify = jwt.verify(
         req.headers.authorization,
         process.env.SECRET_KEY
       );
-      // console.log(process.env.SECRET_KEY);
       if (verify) {
         next();
       } else {
@@ -154,7 +151,6 @@ app.post("/Student-Registration", async function (req, res) {
     const connection = await mongoclient.connect(Mongo_Client_Url);
     const db = connection.db("ZEN_CLASS_REGISTRATION");
     const collection = db.collection("Student_Registration");
-    // console.log(req.body);
     const Get_Email = await collection.findOne({
       Email: req.body.Email,
     });
@@ -170,7 +166,6 @@ app.post("/Student-Registration", async function (req, res) {
       res.json({ message: "Successfully USER Registered..." });
     } else {
       res.json({ message: "Email already exists", Email: req.body.Email });
-      // console.log("Email already exists");
       await connection.close();
     }
   } catch (error) {
@@ -199,7 +194,7 @@ app.post("/Student-Login", async function (req, res) {
           { id: Student_Login._id },
           process.env.SECRET_KEY,
           {
-            expiresIn: "1h",
+            expiresIn: process.env.TOKEN_TIME_OUT,
           }
         );
         res.status(200).json({
