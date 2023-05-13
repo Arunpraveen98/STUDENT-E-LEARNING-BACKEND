@@ -1,7 +1,7 @@
 {
   "name": "zen-class-student-database-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is an innovative student e-learning app built using MERN stack, offering an immersive learning experience. Attend daily classes, complete daily tasks, access free courses, and raise queries for a seamless and interactive educational journey.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "engines": {
     "node": ">=14 <19"
   },
-  "author": "",
+  "author": "ARUN PRAVEEN",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
